@@ -1,133 +1,68 @@
-- Created this app using react 
-- Packages i used material ui, highcharts 
-- You can download and type "npm install" to install the packages and use "npm start" to run development or "npm run build" once build ready use "serve -s build" to serve the production build 
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# Components
+## Available Scripts
 
-- Analysis.jsx  
-    - Estimation.jsx (where the calculation logics is present)
-    - Graph.jsx (where the plot render component is present)
-    - plotFunctions.jsx (where the plot is logic present)
+In the project directory, you can run:
 
-- Calculator.jsx  
-    - Estimation.jsx (where the calculation logics is present)
-    - Graph.jsx (where the plot is present)
+### `npm start`
 
-- Overview.jsx  
-    - Overview.jsx (where all the components and logics are rendered, writtened)
-    - Header.jsx (Header component)
-    - Formula.jsx (all formula's for calculations is present here)
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-- Trips.jsx  
-    - Trips.jsx (where all the list of trips shown)
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
 
-- This Overview.jsx is exported as a module and imported in App.js wrapped within error boundary component
-- Error boundary component is used to capture error and display it in the view
-- In index.js we will get and create the root element, that root element will be taken from public folder index.html and then App.js is rendered
+### `npm test`
 
-## Components Uses
+Launches the test runner in the interactive watch mode.<br />
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-- Overview               : This is a parent component where all states, method are defined and Header, Calculator, Analysis, Trips is rendered in this component as child
-     - Header            : Header component
-     - Formula           : This has all formula's for calculations
-- Analysis               : This is a another parent component where props are passed in Estimation and rendered in this component as child
-     - Estimation        : This component has the textfields and graph componnet is present
-     - Graph             : This component has the graph componnet to be rendered
-     - plotFunctions     : This has all the graph logics and passed to Estimation component
-- Calculator             : This is a another parent component where props are passed in Estimation and rendered in this component as child
-     - Estimation        : This component has the textfields and data viewing components like tableview and list
-- Trips                  : Shows list of trips by trucks
+### `npm run build`
 
+Builds the app for production to the `build` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-## Design
+The build is minified and the filenames include the hashes.<br />
+Your app is ready to be deployed!
 
-- Initial Page is trips once you go inside you can see analysis page and calculator Page
-- In trips page i hardcoded data for trips new york to new jersey and California to Florida, i considered it has a round trip and done calculation considering currenrt month
-- In formula page i listed all the formulas
-- In calculator part as per the problem (https://www.x-b-e.com/news/newsletters/367) mentioned in the mailed i gone through it then i saw excel sheet then i got idea to build
-- The graph based on value entered in the textfield (miles per hour, miles per gallon) it will plot. i used scatter plot for this for two inputs (miles per hour, miles per gallon) and one output (zero-intercept ratio).
-- I used a stacked bar chart to visualize Base Revenue, Adjustment amount, Total Revenue, Cost Change, and Over-Recovery. By stacking these data points on top of each other, you can see the breakdown of the Total Revenue into its component parts.
-- I followed the same for calculating all the percentage values adjustment_percentage, over_recovery_percentage_of_adjustment, implied, Over-Recovery % of Revenue using column chart
-- For showing the gallons i used solid gauge 
-- I used column, spline chart to compare Gallons Per Hour and Zero-Intercept Dollars Per Hour as a combination chart
-- For gallons_per_hour i used line chart which shows miles_per_hour and miles_per_gallon
-- I used scatter plot to show relationship between the inputs (miles per hour, miles per gallon, cost per gallon, base_price_per_unit) and the output (zero-intercept ratio)
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-- Formulas used
+### `npm run eject`
 
-1) To calculate the Gallons per hour
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-   gallons_per_hour = miles_per_hour / miles_per_gallon
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-2) To calculate the Zero-Intercept dollars per hour
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-     zero_intercept_dollars_per_hour = zero_intercept_cost_per_gallon * gallons_per_hour
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-     where zero_intercept_cost_per_gallon is user input
+## Learn More
 
-3) To calculate the Implied
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-     implied = (zero_intercept_dollars_per_hour / base_price_per_hour) * 100
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-     where base_price_per_hour is user input
+### Code Splitting
 
-4) To calculate the Over recovery percentage of adjustment
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-     over_recovery_percentage_of_adjustment = (1-(implied / zero_intercept_ratio)) * 100
+### Analyzing the Bundle Size
 
-     where zero_intercept_ratio is user input or calculated automatically
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-5) To calculate the Gallons
+### Making a Progressive Web App
 
-     gallons = hours * gallons_per_hour
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-     where hours is user input
+### Advanced Configuration
 
-6) To calculate the Base revenue
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-     base_revenue = hours * base_price_per_hour
+### Deployment
 
-     where hours is user input
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
-7) To calculate the Adjustment percentage
+### `npm run build` fails to minify
 
-     adjustment_percentage = (((cost_per_gallon / zero_intercept_cost_per_gallon) - 1) * zero_intercept_ratio) / 100
-
-     where cost_per_gallon, zero_intercept_ratio, zero_intercept_cost_per_gallon is user input or calculated automatically
-
-8) To calculate the Adjustment
-
-     adjustment = base_revenue * adjustment_percentage 
-
-9) To calculate the Total Revenue
-
-     total_revenue = adjustment + base_revenue
-
-10) To calculate the Cost change
-
-     cost_change =  gallons * (cost_per_gallon - zero_intercept_cost_per_gallon)
-
-     where cost_per_gallon, zero_intercept_ratio, zero_intercept_cost_per_gallon is user input or calculated automatically
-
-11) To calculate the Over recovery
-
-     over_recovery =  adjustment - cost_change
-
-12) To calculate the Over recovery percentage
-
-     over_recovery_percentage =  (over_recovery / total_revenue) * 100
-
-13) To calculate the Zero-Intercept Ratio
-
-     zero_intercept_ratio =  (base_price_per_unit/((miles_per_hour / miles_per_gallon) * cost_per_gallon)) * 100
-     
-     where base_price_per_unit is user input and i fixed it as $ 3.65, we can change also. i converted it to percentage. Whenever you change base_price_per_unit the zero_intercept_ratio values will be recalculated automatically. zero_intercept_ratio values are calculated automatically
-
-- These are the formulas i used, all functions wrapped into React useMemo Hook returns a memoized value so that it does not need to be recalculated only runs when one of its dependencies update this can improve performance and can avoid re-renders plus process expensive calculations 
-
-## Styling
-
-- created individual component styling, common component styling (where we use same styles in multiple places in same component)
-
-
-
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
